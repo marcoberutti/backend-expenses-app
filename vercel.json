@@ -4,5 +4,8 @@
     "api/*.js": {
       "runtime": "nodejs18.x"
     }
-  }
+  },
+  "engines": {
+  "node": "18.x"
+  } 
 }
