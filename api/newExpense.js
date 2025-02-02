@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const getDBConnection = require('../db');
 
-app.post('/newExpense', async (req, res) => {
+router.post('/newExpense', async (req, res) => {
   try {
     const { tipo, importo, tipologia, descrizione } = req.body;
     const connection = await getDBConnection();

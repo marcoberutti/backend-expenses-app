@@ -1,8 +1,8 @@
 const express = require('express');
-const router = express.Router();
+const router  = express.Router();
 const getDBConnection = require('../db');
 
-app.get('/dati', async (req, res) => {
+router.get('/dati', async (req, res) => {
   try {
     const connection = await getDBConnection();
     const [results] = await connection.execute('SELECT * FROM Tbl1');

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const getDBConnection = require('../db');
 
-app.delete('/deleteExpense/:id', async (req, res) => {
+router.delete('/deleteExpense/:id', async (req, res) => {
   try {
     const connection = await getDBConnection();
     await connection.execute('DELETE FROM Tbl1 WHERE id = ?', [req.params.id]);
