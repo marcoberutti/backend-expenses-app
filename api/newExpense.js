@@ -33,3 +33,5 @@ router.post('/newExpense', async (req, res) => {
     res.status(500).json({ error: 'Errore nella query' });
   }
 });
+
+module.exports = router;

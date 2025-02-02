@@ -13,4 +13,4 @@ app.use('/api/dati', dati);
 app.use('/api/newExpense', newExpense);
 app.use('/api/deleteExpense', deleteExpense);
 
-module.exports = { app };
+module.exports = app;
