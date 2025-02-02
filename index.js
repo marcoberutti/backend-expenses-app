@@ -13,4 +13,12 @@ app.use('/api/dati', dati);
 app.use('/api/newExpense', newExpense);
 app.use('/api/deleteExpense', deleteExpense);
 
+const PORT = process.env.PORT || 3001;
+
+if (process.env.ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server avviato su http://localhost:${PORT}`);
+  });
+}
+
 module.exports = app;

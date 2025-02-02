@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const getDBConnection = require('../db');
+const apiKeyMiddleware = require('../middlewares/auth');
+
+router.use(apiKeyMiddleware);
 
 router.delete('/:id', async (req, res) => {
   try {
