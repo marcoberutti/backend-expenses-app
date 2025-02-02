@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getDBConnection } = require('../index.js');
+const getDBConnection = require('../db');
 
 app.delete('/deleteExpense/:id', async (req, res) => {
   try {
