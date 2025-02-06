@@ -7,23 +7,40 @@ router.use(apiKeyMiddleware);
 
 router.post('/', async (req, res) => {
   try {
-    const { tipo, importo, tipologia, descrizione } = req.body;
+    const { tipo, importo, tipologia, descrizione, data } = req.body;
     const connection = await getDBConnection();
 
     let query;
-    let values = [descrizione, parseFloat(importo)];
+    let values;
 
     if (tipo === "outcome") {
       switch (tipologia) {
-        case 'spesa': query = 'INSERT INTO expenses (descrizione, Spesa) VALUES (?, ?)'; break;
-        case 'benzina': query = 'INSERT INTO expenses (descrizione, Benzina) VALUES (?, ?)'; break;
-        case 'extra': query = 'INSERT INTO expenses (descrizione, Extra) VALUES (?, ?)'; break;
-        case 'casa': query = 'INSERT INTO expenses (descrizione, Casa) VALUES (?, ?)'; break;
-        case 'salute': query = 'INSERT INTO expenses (descrizione, Salute) VALUES (?, ?)'; break;
-        default: return res.status(400).json({ error: "Tipologia non valida" });
+        case 'spesa':
+          query = 'INSERT INTO expenses (descrizione, Spesa, data) VALUES (?, ?, ?)';
+          values = [descrizione, parseFloat(importo), data];
+          break;
+        case 'benzina':
+          query = 'INSERT INTO expenses (descrizione, Benzina, data) VALUES (?, ?, ?)';
+          values = [descrizione, parseFloat(importo), data];
+          break;
+        case 'extra':
+          query = 'INSERT INTO expenses (descrizione, Extra, data) VALUES (?, ?, ?)';
+          values = [descrizione, parseFloat(importo), data];
+          break;
+        case 'casa':
+          query = 'INSERT INTO expenses (descrizione, Casa, data) VALUES (?, ?, ?)';
+          values = [descrizione, parseFloat(importo), data];
+          break;
+        case 'salute':
+          query = 'INSERT INTO expenses (descrizione, Salute, data) VALUES (?, ?, ?)';
+          values = [descrizione, parseFloat(importo), data];
+          break;
+        default:
+          return res.status(400).json({ error: "Tipologia non valida" });
       }
     } else if (tipo === "entrata") {
-      query = 'INSERT INTO expenses (descrizione, Income) VALUES (?, ?)';
+      query = 'INSERT INTO expenses (descrizione, Income, data) VALUES (?, ?, ?)';
+      values = [descrizione, parseFloat(importo), data];
     } else {
       return res.status(400).json({ error: "Tipo non valido" });
     }
@@ -33,8 +50,10 @@ router.post('/', async (req, res) => {
     res.json({ message: 'Dati inseriti correttamente' });
 
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Errore nella query' });
   }
 });
+
 
 module.exports = router;
