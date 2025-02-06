@@ -8,7 +8,7 @@ router.use(apiKeyMiddleware);
 router.get('/', async (req, res) => {
   try {
     const connection = await getDBConnection();
-    const [results] = await connection.execute('SELECT * FROM Tbl1');
+    const [results] = await connection.execute('SELECT * FROM expenses');
     await connection.end();
     res.json(results);
   } catch (err) {

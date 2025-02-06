@@ -8,7 +8,7 @@ router.use(apiKeyMiddleware);
 router.delete('/:id', async (req, res) => {
   try {
     const connection = await getDBConnection();
-    await connection.execute('DELETE FROM Tbl1 WHERE id = ?', [req.params.id]);
+    await connection.execute('DELETE FROM expenses WHERE id = ?', [req.params.id]);
     await connection.end();
     res.json({ message: 'Dati eliminati correttamente' });
   } catch (err) {
