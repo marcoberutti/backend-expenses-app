@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
         default:
           return res.status(400).json({ error: "Tipologia non valida" });
       }
-    } else if (tipo === "entrata") {
+    } else if (tipo === "income") {
       query = 'INSERT INTO expenses (descrizione, Income, data) VALUES (?, ?, ?)';
       values = [descrizione, parseFloat(importo), data];
     } else {
