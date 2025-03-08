@@ -14,7 +14,7 @@ router.put('/:id', async (req, res) => {
     const connection = await getDBConnection();
     const resetQuery = `
     UPDATE expenses 
-    SET Spesa = NULL, Benzina = NULL, Extra = NULL, Casa = NULL, Salute = NULL, Income = NULL
+    SET Spesa = NULL, Benzina = NULL, Extra = NULL, Casa = NULL, Salute = NULL, Income = NULL, Investimenti = NULL, tasse = NULL
     WHERE id = ?;
     `;
     await connection.query(resetQuery, [id]);
@@ -38,6 +38,14 @@ router.put('/:id', async (req, res) => {
           break;
         case 'Salute':
           query = 'UPDATE expenses SET descrizione = ?, Salute = ?, data = ? WHERE id = ?';
+          values = [descrizione, importo, data, id];
+          break;
+        case 'Investimenti':
+          query = 'UPDATE expenses SET descrizione = ?, Investimenti = ?, data = ? WHERE id = ?';
+          values = [descrizione, importo, data, id];
+          break;
+        case 'tasse':
+          query = 'UPDATE expenses SET descrizione = ?, tasse = ?, data = ? WHERE id = ?';
           values = [descrizione, importo, data, id];
           break;
         default: return res.status(400).json({ error: "Tipologia non valida" });

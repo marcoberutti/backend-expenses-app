@@ -35,6 +35,14 @@ router.post('/', async (req, res) => {
           query = 'INSERT INTO expenses (descrizione, Salute, data) VALUES (?, ?, ?)';
           values = [descrizione, parseFloat(importo), data];
           break;
+        case 'investimenti':
+          query = 'INSERT INTO expenses (descrizione, Investimenti, data) VALUES (?, ?, ?)';
+          values = [descrizione, parseFloat(importo), data];
+          break;
+        case 'tasse':
+          query = 'INSERT INTO expenses (descrizione, tasse, data) VALUES (?, ?, ?)';
+          values = [descrizione, parseFloat(importo), data];
+          break;
         default:
           return res.status(400).json({ error: "Tipologia non valida" });
       }
