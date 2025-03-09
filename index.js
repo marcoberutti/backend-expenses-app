@@ -17,6 +17,9 @@ const deleteProductSpesa = require('./api/deleteProductSpesa');
 const newProductSpesa = require('./api/newProductSpesa');
 const populateProdotti = require('./api/populateListaProdotti');
 const getProductsForSelect = require('./api/getProductsForSelect');
+const createEvent = require('./api/createEvent');
+const getEvents = require('./api/getEvents');
+const writeEvent = require('./api/writeEvent');
 
 app.use('/api/dati', dati);
 app.use('/api/newExpense', newExpense);
@@ -29,6 +32,10 @@ app.use('/api/deleteProductSpesa', deleteProductSpesa);
 app.use('/api/newProductSpesa', newProductSpesa);
 app.use('/api/populateListaProdotti', populateProdotti);
 app.use('/api/getProductsForSelect', getProductsForSelect);
+
+app.use('/api/createEvent', createEvent);
+app.use('/api/getEvents', getEvents);
+app.use('/api/writeEvent', writeEvent);
 
 app.post("/api/supermercato/:item", async (req, res) => {
   let itemToSearch = req.params.item;
