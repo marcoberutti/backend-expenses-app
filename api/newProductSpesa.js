@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Errore nella query' });
+    res.status(500).json({ error: 'Errore nella query' + err });
   }
 });
 
