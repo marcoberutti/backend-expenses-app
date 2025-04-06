@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
     const [results] = await connection.execute('SELECT * FROM events');
     await connection.end();
     res.json(results);
-    console.log(results)
 
   } catch (err) {
     console.error(err);

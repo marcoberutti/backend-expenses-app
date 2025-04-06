@@ -21,6 +21,8 @@ const createEvent = require('./api/createEvent');
 const getEvents = require('./api/getEvents');
 const writeEvent = require('./api/writeEvent');
 
+const filterRiepilogo = require('./api/filterRiepilogo');
+
 app.use('/api/dati', dati);
 app.use('/api/newExpense', newExpense);
 app.use('/api/deleteExpense', deleteExpense);
@@ -36,6 +38,8 @@ app.use('/api/getProductsForSelect', getProductsForSelect);
 app.use('/api/createEvent', createEvent);
 app.use('/api/getEvents', getEvents);
 app.use('/api/writeEvent', writeEvent);
+
+app.use('/api/filterRiepilogo', filterRiepilogo);
 
 app.post("/api/supermercato/:item", async (req, res) => {
   let itemToSearch = req.params.item;
