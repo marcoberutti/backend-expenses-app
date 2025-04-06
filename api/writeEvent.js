@@ -19,6 +19,7 @@ router.put('/:id', async (req, res) => {
     res.json({ message:`Dati modificati correttamente`});
   } catch (err) {
     res.status(500).json({ error: `Errore nella query ${err}`});
+    console.log(err)
   }
 });
 
