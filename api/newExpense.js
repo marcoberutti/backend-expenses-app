@@ -10,45 +10,20 @@ router.post('/', async (req, res) => {
     const { tipo, importo, tipologia, descrizione, data } = req.body;
     const connection = await getDBConnection();
 
+    const allowedColumns = ["Spesa", "Benzina", "Extra", "Casa", "Salute","Investimenti", "tasse", "cucito_in", "cucito_out", "Income"];
+
+    if (!allowedColumns.includes(tipologia)) {
+      return res.status(400).json({ error: "Tipologia non permessa" });
+    }
+
     let query;
     let values;
 
-    if (tipo === "outcome") {
-      switch (tipologia) {
-        case 'spesa':
-          query = 'INSERT INTO expenses (descrizione, Spesa, data) VALUES (?, ?, ?)';
-          values = [descrizione, parseFloat(importo), data];
-          break;
-        case 'benzina':
-          query = 'INSERT INTO expenses (descrizione, Benzina, data) VALUES (?, ?, ?)';
-          values = [descrizione, parseFloat(importo), data];
-          break;
-        case 'extra':
-          query = 'INSERT INTO expenses (descrizione, Extra, data) VALUES (?, ?, ?)';
-          values = [descrizione, parseFloat(importo), data];
-          break;
-        case 'casa':
-          query = 'INSERT INTO expenses (descrizione, Casa, data) VALUES (?, ?, ?)';
-          values = [descrizione, parseFloat(importo), data];
-          break;
-        case 'salute':
-          query = 'INSERT INTO expenses (descrizione, Salute, data) VALUES (?, ?, ?)';
-          values = [descrizione, parseFloat(importo), data];
-          break;
-        case 'investimenti':
-          query = 'INSERT INTO expenses (descrizione, Investimenti, data) VALUES (?, ?, ?)';
-          values = [descrizione, parseFloat(importo), data];
-          break;
-        case 'tasse':
-          query = 'INSERT INTO expenses (descrizione, tasse, data) VALUES (?, ?, ?)';
-          values = [descrizione, parseFloat(importo), data];
-          break;
-        default:
-          return res.status(400).json({ error: "Tipologia non valida" });
-      }
-    } else if (tipo === "income") {
-      query = 'INSERT INTO expenses (descrizione, Income, data) VALUES (?, ?, ?)';
-      values = [descrizione, parseFloat(importo), data];
+    if (tipo) {
+
+          query = `INSERT INTO expenses (descrizione, ${tipologia}, data) VALUES (?, ?, ?)`;
+          values = [ descrizione, parseFloat(importo), data];
+
     } else {
       return res.status(400).json({ error: "Tipo non valido" });
     }
