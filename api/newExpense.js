@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const getDBConnection = require('../db');
 const apiKeyMiddleware = require('../middlewares/auth');
+const columns = require('../columns')
 
 router.use(apiKeyMiddleware);
 
@@ -10,7 +11,7 @@ router.post('/', async (req, res) => {
     const { tipo, importo, tipologia, descrizione, data } = req.body;
     const connection = await getDBConnection();
 
-    const allowedColumns = ["Spesa", "Benzina", "Extra", "Casa", "Salute","Investimenti", "tasse", "cucito_in", "cucito_out", "Income"];
+    const allowedColumns = columns;
 
     if (!allowedColumns.includes(tipologia)) {
       return res.status(400).json({ error: "Tipologia non permessa" });

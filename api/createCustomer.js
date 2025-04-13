@@ -7,17 +7,18 @@ router.use(apiKeyMiddleware);
 
 router.post('/', async (req, res) => {
   try {
-    const { title, start, color } = req.body;
+    console.log(req.body)
+    const { nome, lavorazione, stato, data } = req.body;
+    console.log(req.body)
 
-    // Controlla se i dati sono validi
-    if (!title || !start || !color) {
+    if (!data) {
       return res.status(400).json({ error: "Dati mancanti o non validi" });
     }
 
     const connection = await getDBConnection();
     await connection.execute(
-      'INSERT INTO events (title, start, color) VALUES (?, ?, ?)',
-      [title, start, color]
+      'INSERT INTO clienti (nome, lavorazione, stato, data) VALUES (?, ?, ?, ?)',
+      [nome, lavorazione, stato, data]
     );
 
     await connection.end();

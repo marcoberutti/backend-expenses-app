@@ -7,17 +7,16 @@ router.use(apiKeyMiddleware);
 
 router.post('/', async (req, res) => {
   try {
-    const { title, start, color } = req.body;
+    const { nome } = req.body;
 
-    // Controlla se i dati sono validi
-    if (!title || !start || !color) {
+    if (!req.body) {
       return res.status(400).json({ error: "Dati mancanti o non validi" });
     }
 
     const connection = await getDBConnection();
     await connection.execute(
-      'INSERT INTO events (title, start, color) VALUES (?, ?, ?)',
-      [title, start, color]
+      'INSERT INTO materiali (nome_materiale) VALUES (?)',
+      [nome]
     );
 
     await connection.end();

@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const getDBConnection = require('../db');
 const apiKeyMiddleware = require('../middlewares/auth');
+const columns = require('../columns')
 
 router.use(apiKeyMiddleware);
 
@@ -12,7 +13,7 @@ router.post('/', async (req, res) => {
     connection = await getDBConnection();
     const { inizio, fine, categoria } = req.body;
 
-    const allowedColumns = ["Income", "Spesa", "Benzina", "Extra", "Casa", "Salute", "Investimenti", "tasse"];
+    const allowedColumns = columns
     if (!allowedColumns.includes(categoria)) {
       return res.status(400).json({ error: 'Categoria non valida' });
     }

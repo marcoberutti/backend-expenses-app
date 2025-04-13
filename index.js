@@ -23,6 +23,13 @@ const writeEvent = require('./api/writeEvent');
 
 const filterRiepilogo = require('./api/filterRiepilogo');
 
+const createCustomer = require('./api/createCustomer');
+const getCustomers = require('./api/getCustomers');
+
+const createMaterial = require('./api/createMaterial');
+const getMaterials = require('./api/getMaterials');
+const deleteCustomerOrMateriale = require('./api/deleteCustomerOrMateriale');
+
 app.use('/api/dati', dati);
 app.use('/api/newExpense', newExpense);
 app.use('/api/deleteExpense', deleteExpense);
@@ -40,6 +47,13 @@ app.use('/api/getEvents', getEvents);
 app.use('/api/writeEvent', writeEvent);
 
 app.use('/api/filterRiepilogo', filterRiepilogo);
+
+app.use('/api/createCustomer', createCustomer);
+app.use('/api/getCustomers', getCustomers);
+
+app.use('/api/createMaterial', createMaterial);
+app.use('/api/getMaterials', getMaterials);
+app.use('/api/deleteCustomerOrMateriale', deleteCustomerOrMateriale);
 
 app.post("/api/supermercato/:item", async (req, res) => {
   let itemToSearch = req.params.item;
@@ -72,10 +86,10 @@ app.post("/api/supermercato/:item", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3010;
 
-if (process.env.ENV !== "production") {
-  app.listen(PORT, () => {
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, '127.0.0.1',() => {
     console.log(`✅ Server avviato su http://localhost:${PORT}`);
   });
 }

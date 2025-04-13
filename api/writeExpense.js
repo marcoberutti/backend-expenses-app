@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const getDBConnection = require('../db');
 const apiKeyMiddleware = require('../middlewares/auth');
+const columns = require('../columns')
 
 router.use(apiKeyMiddleware);
 
@@ -10,15 +11,16 @@ router.put('/:id', async (req, res) => {
   const id = req.params.id
   let query = "";
   let values = [];
+  const colonneTipologiche = columns;
   try {
     const connection = await getDBConnection();
     const resetQuery = `
-    UPDATE expenses 
-    SET Spesa = NULL, Benzina = NULL, Extra = NULL, Casa = NULL, Salute = NULL, Income = NULL, Investimenti = NULL, tasse = NULL
+    UPDATE expenses
+    SET ${colonneTipologiche.map(col => `${col} = NULL`).join(', ')}
     WHERE id = ?;
     `;
     await connection.query(resetQuery, [id]);
-    if (tipo) {
+    if (req.body) {
           query = `UPDATE expenses SET descrizione = ?, ${tipologia} = ?, data = ? WHERE id = ?`;
           values = [descrizione, importo, data, id]; 
     } else {
