@@ -6,17 +6,16 @@ const apiKeyMiddleware = require('../middlewares/auth');
 router.use(apiKeyMiddleware);
 
 router.put('/:id', async (req, res) => {
-  const { title, start, color} = req.body;
   const id = req.params.id
   try {
     const connection = await getDBConnection();
     
-    query = 'UPDATE events SET title = ?, start = ?, color = ? WHERE id = ?';
-    values = [title, start, color, id];
-        
+    query = 'UPDATE clienti SET active = ? WHERE id = ?'; // Usa un placeholder per il valore
+    values = ['false', id]; // Passa 'false' come stringa nell'array dei valori
+    
     await connection.query(query, values);
     await connection.end();
-    res.json({ message:`Dati modificati correttamente`});
+    res.json({ message:`Cliente archiviato`});
   } catch (err) {
     res.status(500).json({ error: `Errore nella query ${err}`});
     console.log(err)

@@ -5,17 +5,19 @@ const apiKeyMiddleware = require('../middlewares/auth');
 
 router.use(apiKeyMiddleware);
 
-router.get('/', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
+    const {id } = req.params;
 
     const connection = await getDBConnection();
-    const [results] = await connection.execute('SELECT * FROM materiali');
+    await connection.execute(`DELETE FROM materiali WHERE id = ?`, [id]);
     await connection.end();
-    res.json(results);
-    await connection.end();
+    
+    res.json({ message: 'Dati eliminati correttamente' });
   } catch (err) {
-    res.status(500).json({ error: 'Errore nella query o server: ' + err.message });
+    res.status(500).json({ error: 'Errore nella query: ' + err.message });
   }
 });
+
 
 module.exports = router;

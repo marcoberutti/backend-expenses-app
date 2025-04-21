@@ -8,7 +8,7 @@ router.use(apiKeyMiddleware);
 router.post('/', async (req, res) => {
   try {
     console.log(req.body)
-    const { nome, lavorazione, stato, data } = req.body;
+    const { nome, lavorazione, stato, data, active } = req.body;
     console.log(req.body)
 
     if (!data) {
@@ -17,8 +17,8 @@ router.post('/', async (req, res) => {
 
     const connection = await getDBConnection();
     await connection.execute(
-      'INSERT INTO clienti (nome, lavorazione, stato, data) VALUES (?, ?, ?, ?)',
-      [nome, lavorazione, stato, data]
+      'INSERT INTO clienti (nome, lavorazione, stato, active, data) VALUES (?, ?, ?, ?, ?)',
+      [nome, lavorazione, stato, active, data]
     );
 
     await connection.end();

@@ -6,13 +6,13 @@ const apiKeyMiddleware = require('../middlewares/auth');
 router.use(apiKeyMiddleware);
 
 router.put('/:id', async (req, res) => {
-  const { title, start, color} = req.body;
+  const { prezzo } = req.body;
   const id = req.params.id
   try {
     const connection = await getDBConnection();
     
-    query = 'UPDATE events SET title = ?, start = ?, color = ? WHERE id = ?';
-    values = [title, start, color, id];
+    query = 'UPDATE lista_spesa SET prezzo = ? WHERE id = ?';
+    values = [prezzo, id];
         
     await connection.query(query, values);
     await connection.end();

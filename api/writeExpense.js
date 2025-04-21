@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const getDBConnection = require('../db');
 const apiKeyMiddleware = require('../middlewares/auth');
-const columns = require('../columns')
+const columns = require('../columns');
 
 router.use(apiKeyMiddleware);
 
