@@ -30,6 +30,8 @@ const writeStatoLavorazione = require('./api/writeStatoLavorazione');
 const createMaterial = require('./api/createMaterial');
 const deleteMateriale = require('./api/deleteMateriale');
 
+const transferMoney = require('./api/transferMoney');
+
 app.use('/api/getDatas', getDatas);
 app.use('/api/newExpense', newExpense);
 app.use('/api/deleteExpense', deleteExpense);
@@ -52,6 +54,8 @@ app.use('/api/writeStatoLavorazione', writeStatoLavorazione);
 
 app.use('/api/createMaterial', createMaterial);
 app.use('/api/deleteMateriale', deleteMateriale);
+
+app.use('/api/transferMoney', transferMoney);
 
 
 const PORT = process.env.PORT || 3010;
