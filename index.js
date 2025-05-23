@@ -32,6 +32,9 @@ const deleteMateriale = require('./api/deleteMateriale');
 
 const transferMoney = require('./api/transferMoney');
 
+const newMonthBalance = require('./api/newMonthBalance')
+const getMonthBalance = require('./api/getMonthBalance')
+
 app.use('/api/getDatas', getDatas);
 app.use('/api/newExpense', newExpense);
 app.use('/api/deleteExpense', deleteExpense);
@@ -56,6 +59,9 @@ app.use('/api/createMaterial', createMaterial);
 app.use('/api/deleteMateriale', deleteMateriale);
 
 app.use('/api/transferMoney', transferMoney);
+
+app.use('/api/newMonthBalance', newMonthBalance);
+app.use('/api/getMonthBalance', getMonthBalance);
 
 
 const PORT = process.env.PORT || 3010;
